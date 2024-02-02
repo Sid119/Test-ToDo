@@ -16,17 +16,23 @@ jobs:
         node-version: 14
 
     - name: Install dependencies
-      run: npm install -g npm
+      run: npm install
       
     - name: Install Jest Package (Backend)
       working-directory: backend
-      run: |
-        npm install -g jest
-        npm test
+      run: npm install --save-dev jest
       
     - name: Run Backend Unit Tests
       working-directory: backend
       run: npm test
+      
+    - name: Debug Jest Installation
+      working-directory: backend
+      run: |
+        cat package.json
+        npm list jest
+        npm install --verbose
+        npm test
 
   # Snyk:
   #   runs-on: ubuntu-latest

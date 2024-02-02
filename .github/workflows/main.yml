@@ -18,7 +18,8 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run unit tests
+    - name: Run Backend Unit Tests
+      working-directory: backend
       run: npm test
 
   # Snyk:

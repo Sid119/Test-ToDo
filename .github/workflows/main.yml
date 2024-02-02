@@ -128,11 +128,11 @@ jobs:
 
     - name: Start the application
       working-directory: fronted
-      run: npm start &
+      run: npm start
       
     - name: Start the application
       working-directory: backend
-      run: npm start &
+      run: npm start
 
     - name: Wait for the application to start
       run: sleep 10

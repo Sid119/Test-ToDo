@@ -114,26 +114,50 @@ jobs:
   Locally:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Cache backend node modules
+        uses: actions/cache@v2
+        with:
+          path: |
+            backend/node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('backend/**/*.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      - name: Install Node.js and npm (Backend)
+        uses: actions/setup-node@v2
         with:
           node-version: '14'
+          run: npm install
+          
+      - name: Cache frontend node modules
+        uses: actions/cache@v2
+        with:
+          path: |
+            frontend/node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('frontend/**/*.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
 
-      - name: Install Dependencies
-        run: |
-          cd frontend
-          npm install
-          cd ../backend
-          npm install
-          cd ../backend
-          npm i -g jest
+      - name: Install Node.js and npm (Frontend)
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          run: npm install
 
-      - name: Build and Test
+      - name: Install Jest Package (Backend)
+        working-directory: backend
+        run: npm i -g jest
+
+      - name: Run Backend
+        working-directory: backend
         run: |
-          cd frontend
+          npm test
           npm start
-          cd ../backend
+
+      - name: Run Fonrtend
+        run: |
+          cd frontend
           npm start

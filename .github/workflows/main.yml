@@ -111,9 +111,9 @@ jobs:
         working-directory: backend
         run: npm test
 
-  Locally:
+  Locally_on_GitHub:
     runs-on: ubuntu-latest
-    needs: ["Build"]
+    needs: ["Unit_Testing"]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2

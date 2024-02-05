@@ -19,11 +19,11 @@ jobs:
           cd frontend
           npm install
           cd ../backend
-          npm start
+          npm install
 
       - name: Build and Test
         run: |
           cd frontend
-          npm run build
+          npm start
           cd ../backend
           npm start

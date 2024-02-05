@@ -180,5 +180,5 @@ jobs:
 
     - name: Run Fucntional Testing
       run: |
-        cd Functional_Testing/demo
+        cd Fucntional_Testing/demo
         mvn test

@@ -113,7 +113,7 @@ jobs:
         run: npm test
 
   Locally_on_GitHub:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: ["Unit_Testing"]
     steps:
       - name: Checkout code

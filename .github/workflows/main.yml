@@ -113,20 +113,20 @@ jobs:
         run: npm test
 
   Locally_on_GitHub:
-    runs-on: Pipeline_Runner
+    runs-on: self-hosted
     needs: ["Unit_Testing"]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Cache backend node modules
-        uses: actions/cache@v2
-        with:
-          path: |
-            backend/node_modules
-          key: ${{ runner.os }}-npm-${{ hashFiles('backend/**/*.json') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-
+      # - name: Cache backend node modules
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: |
+      #       backend/node_modules
+      #     key: ${{ runner.os }}-npm-${{ hashFiles('backend/**/*.json') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-npm-
 
       - name: Install Node.js and npm (Backend)
         uses: actions/setup-node@v2
@@ -134,14 +134,14 @@ jobs:
           node-version: '14'
           run: npm install
           
-      - name: Cache frontend node modules
-        uses: actions/cache@v2
-        with:
-          path: |
-            frontend/node_modules
-          key: ${{ runner.os }}-npm-${{ hashFiles('frontend/**/*.json') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-
+      # - name: Cache frontend node modules
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: |
+      #       frontend/node_modules
+      #     key: ${{ runner.os }}-npm-${{ hashFiles('frontend/**/*.json') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-npm-
 
       - name: Install Node.js and npm (Frontend)
         uses: actions/setup-node@v2

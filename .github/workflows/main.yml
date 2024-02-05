@@ -171,7 +171,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Navigate to Project Directory
-        run: cd functional-test/demo 
+        run: cd Fucntional-Testing/demo 
 
       - name: Set up JDK
         uses: actions/setup-java@v2

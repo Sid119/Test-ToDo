@@ -157,7 +157,7 @@ jobs:
           cd backend
           npm start
 
-      - name: Run Fonrtend
+      - name: Run Frontend
         run: |
           cd frontend
           npm start

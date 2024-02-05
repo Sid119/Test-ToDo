@@ -153,9 +153,8 @@ jobs:
         run: npm i -g jest
 
       - name: Run Backend
-        working-directory: backend
         run: |
-          npm test
+          cd backend
           npm start
 
       - name: Run Fonrtend

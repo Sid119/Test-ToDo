@@ -2,7 +2,7 @@ name: To-Do Pipeline
 on:
   workflow_dispatch
 
-# jobs:
+jobs:
 #   # Snyk:
 #   #   runs-on: ubuntu-latest
 
@@ -46,67 +46,94 @@ on:
 #   #     #   env:
 #   #     #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-#   Build:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v2
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-#       - name: Cache backend node modules
-#         uses: actions/cache@v2
-#         with:
-#           path: |
-#             backend/node_modules
-#           key: ${{ runner.os }}-npm-${{ hashFiles('backend/**/*.json') }}
-#           restore-keys: |
-#             ${{ runner.os }}-npm-
+      - name: Cache backend node modules
+        uses: actions/cache@v2
+        with:
+          path: |
+            backend/node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('backend/**/*.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
 
-#       - name: Install Node.js and npm (Backend)
-#         uses: actions/setup-node@v2
-#         with:
-#           node-version: '14'
-#           run: npm install
+      - name: Install Node.js and npm (Backend)
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          run: npm install
           
-#       - name: Cache frontend node modules
-#         uses: actions/cache@v2
-#         with:
-#           path: |
-#             frontend/node_modules
-#           key: ${{ runner.os }}-npm-${{ hashFiles('frontend/**/*.json') }}
-#           restore-keys: |
-#             ${{ runner.os }}-npm-
+      - name: Cache frontend node modules
+        uses: actions/cache@v2
+        with:
+          path: |
+            frontend/node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('frontend/**/*.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
 
-#       - name: Install Node.js and npm (Frontend)
-#         uses: actions/setup-node@v2
-#         with:
-#           node-version: '14'
-#           run: npm install
+      - name: Install Node.js and npm (Frontend)
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          run: npm install
 
-#   Unit_Testing:
-#     runs-on: ubuntu-latest
-#     needs: ["Build"]
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v2
+  Unit_Testing:
+    runs-on: ubuntu-latest
+    needs: ["Build"]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-#       - name: Cache backend node modules
-#         uses: actions/cache@v2
-#         with:
-#           path: |
-#             backend/node_modules
-#           key: ${{ runner.os }}-npm-${{ hashFiles('backend/**/*.json') }}
-#           restore-keys: |
-#             ${{ runner.os }}-npm-
+      - name: Cache backend node modules
+        uses: actions/cache@v2
+        with:
+          path: |
+            backend/node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('backend/**/*.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
 
-#       - name: Install Node.js and npm (Backend)
-#         uses: actions/setup-node@v2
-#         with:
-#           node-version: '14'
-#           run: npm install
+      - name: Install Node.js and npm (Backend)
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          run: npm install
 
-#       - name: Install Jest Package (Backend)
-#         working-directory: backend
-#         run: npm i -g jest
-#       - name: Run Backend Unit Tests
-#         working-directory: backend
-#         run: npm test
+      - name: Install Jest Package (Backend)
+        working-directory: backend
+        run: npm i -g jest
+      - name: Run Backend Unit Tests
+        working-directory: backend
+        run: npm test
+
+  Locally:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+
+      - name: Install Dependencies
+        run: |
+          cd frontend
+          npm install
+          cd ../backend
+          npm install
+          cd ../backend
+          npm i -g jest
+
+      - name: Build and Test
+        run: |
+          cd frontend
+          npm start
+          cd ../backend
+          npm start

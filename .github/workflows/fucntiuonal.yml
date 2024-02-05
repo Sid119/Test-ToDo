@@ -20,6 +20,8 @@ jobs:
           npm install
           cd ../backend
           npm install
+          cd ../backend
+          npm i -g jest
 
       - name: Build and Test
         run: |

@@ -53,6 +53,43 @@ jobs:
   #     - name: Checkout code
   #       uses: actions/checkout@v2
 
+      # - name: Cache backend node modules
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: |
+      #       backend/node_modules
+      #     key: ${{ runner.os }}-npm-${{ hashFiles('backend/**/*.json') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-npm-
+
+  #     - name: Install Node.js and npm (Backend)
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: '14'
+  #         run: npm install
+          
+      # - name: Cache frontend node modules
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: |
+      #       frontend/node_modules
+      #     key: ${{ runner.os }}-npm-${{ hashFiles('frontend/**/*.json') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-npm-
+
+  #     - name: Install Node.js and npm (Frontend)
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: '14'
+  #         run: npm install
+
+  # Unit_Testing:
+  #   runs-on: ubuntu-latest
+  #   needs: ["Build"]
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2
+
   #     - name: Cache backend node modules
   #       uses: actions/cache@v2
   #       with:
@@ -67,27 +104,18 @@ jobs:
   #       with:
   #         node-version: '14'
   #         run: npm install
-          
-  #     - name: Cache frontend node modules
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: |
-  #           frontend/node_modules
-  #         key: ${{ runner.os }}-npm-${{ hashFiles('frontend/**/*.json') }}
-  #         restore-keys: |
-  #           ${{ runner.os }}-npm-
 
-  #     - name: Install Node.js and npm (Frontend)
-  #       uses: actions/setup-node@v2
-  #       with:
-  #         node-version: '14'
-  #         run: npm install
+  #     - name: Install Jest Package (Backend)
+  #       working-directory: backend
+  #       run: npm i -g jest
+  #     - name: Run Backend Unit Tests
+  #       working-directory: backend
+  #       run: npm test
 
-  Unit_Testing:
-    runs-on: ubuntu-latest
-    needs: ["Build"]
+  deploy:
+    runs-on: self-hosted
     steps:
-      - name: Checkout code
+      - name: Checkout Repository
         uses: actions/checkout@v2
 
       - name: Cache backend node modules
@@ -103,11 +131,25 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '14'
-          run: npm install
+          run: |
+            cd backend
+            npm install
+            npm start &
 
-      - name: Install Jest Package (Backend)
-        working-directory: backend
-        run: npm i -g jest
-      - name: Run Backend Unit Tests
-        working-directory: backend
-        run: npm test
+      - name: Cache frontend node modules
+        uses: actions/cache@v2
+        with:
+          path: |
+            frontend/node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('frontend/**/*.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      - name: Install Node.js and npm (Frontend)
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          run: |
+            cd frontend
+            npm install
+            npm start &

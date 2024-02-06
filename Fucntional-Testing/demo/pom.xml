@@ -11,7 +11,7 @@
 
   <build>
     <sourceDirectory>src/main/java/com/example</sourceDirectory>
-    <finalName>onlinebookstore</finalName>
+    <finalName>todo-app</finalName>
     <plugins>
      <plugin>
         <groupId>org.apache.maven.plugins</groupId>

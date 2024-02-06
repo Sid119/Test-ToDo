@@ -1,0 +1,50 @@
+name: GitHub_Runner
+on:
+  push
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Cache backend node modules
+        uses: actions/cache@v2
+        with:
+           path: |
+             backend/node_modules
+           key: ${{ runner.os }}-npm-${{ hashFiles('backend/**/*.json') }}
+           restore-keys: |
+             ${{ runner.os }}-npm-
+
+      - name: Install Node.js and npm (Backend)
+        uses: actions/setup-node@v2
+        with:
+           node-version: '14'
+           run: npm install
+          
+      - name: Cache frontend node modules
+        uses: actions/cache@v2
+        with:
+           path: |
+             frontend/node_modules
+           key: ${{ runner.os }}-npm-${{ hashFiles('frontend/**/*.json') }}
+           restore-keys: |
+             ${{ runner.os }}-npm-
+
+      - name: Install Node.js and npm (Frontend)
+        uses: actions/setup-node@v2
+        with:
+           node-version: '14'
+           run: npm install
+
+      - name: Run Backend
+        run: |
+           cd backend
+           npm start
+
+      - name: Run Frontend
+        run: |
+           cd frontend
+           npm start

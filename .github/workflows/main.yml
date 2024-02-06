@@ -165,6 +165,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '11'  # Adjust as needed
+          distribution: 'adopt'
 
       # - name: Build with Maven
       #   run: mvn -f Fucntional-Testing/demo clean package

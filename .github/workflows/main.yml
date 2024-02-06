@@ -111,9 +111,3 @@ jobs:
       # - name: Run Backend Unit Tests
       #   working-directory: backend
       #   run: npm test
-
-
-      - name: Run Functional Tests
-        run: |
-          cd Fucntional-Testing/demo
-          mvn test

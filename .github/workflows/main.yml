@@ -156,7 +156,7 @@ jobs:
 
   Functional_Testing:
     runs-on: windows-latest
-    needs: ["Deploy"]
+   # needs: ["Deploy"]
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2

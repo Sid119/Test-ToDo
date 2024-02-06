@@ -7,20 +7,9 @@
   <version>1.0-SNAPSHOT</version>
   <name>demo</name>
   <url>http://maven.apache.org</url>
- 
+  <groupId>org.apache.maven.plugins</groupId>
   <artifactId>maven-surefire-plugin</artifactId>
-  <build>
-    <sourceDirectory>src/main/java/com/example</sourceDirectory>
-		<finalName>onlinebookstore</finalName>
-  <plugin>
-      <configuration>
-               <forkCount>3</forkCount>
-               <reuseForks>true</reuseForks>
-               <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
-      </configuration>
 
-</plugin>
-</build>     
   <dependencies>
     <dependency>
       <groupId>junit</groupId>

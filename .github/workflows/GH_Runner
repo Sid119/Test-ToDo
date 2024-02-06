@@ -1,1 +1,5 @@
+name: GitHub_Runner
+on:
+  push
 
+jobs:

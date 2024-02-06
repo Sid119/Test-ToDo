@@ -112,47 +112,47 @@ jobs:
   #       working-directory: backend
   #       run: npm test
 
-  Deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+  # Deploy:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout Repository
+  #       uses: actions/checkout@v2
 
-      - name: Cache backend node modules
-        uses: actions/cache@v2
-        with:
-          path: |
-            backend/node_modules
-          key: ${{ runner.os }}-npm-${{ hashFiles('backend/**/*.json') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-
+  #     - name: Cache backend node modules
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: |
+  #           backend/node_modules
+  #         key: ${{ runner.os }}-npm-${{ hashFiles('backend/**/*.json') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-npm-
 
-      - name: Install Node.js and npm (Backend)
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-          run: |
-            cd backend
-            npm install
-            npm start &
+  #     - name: Install Node.js and npm (Backend)
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: '14'
+  #         run: |
+  #           cd backend
+  #           npm install
+  #           npm start &
 
-      - name: Cache frontend node modules
-        uses: actions/cache@v2
-        with:
-          path: |
-            frontend/node_modules
-          key: ${{ runner.os }}-npm-${{ hashFiles('frontend/**/*.json') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-
+  #     - name: Cache frontend node modules
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: |
+  #           frontend/node_modules
+  #         key: ${{ runner.os }}-npm-${{ hashFiles('frontend/**/*.json') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-npm-
 
-      - name: Install Node.js and npm (Frontend)
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-          run: |
-            cd frontend
-            npm install
-            npm start &
+  #     - name: Install Node.js and npm (Frontend)
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: '14'
+  #         run: |
+  #           cd frontend
+  #           npm install
+  #           npm start &
 
   Functional_Testing:
     runs-on: windows-latest

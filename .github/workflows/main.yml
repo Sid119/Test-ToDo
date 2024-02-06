@@ -183,7 +183,7 @@ jobs:
           java-version: '11'  # Adjust as needed
 
       - name: Build with Maven
-        run: mvn clean install -B
+        run: mvn -f Fucntional-Testing/demo clean package
 
       - name: Run Functional Tests
         run: |

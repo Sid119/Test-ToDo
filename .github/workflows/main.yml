@@ -155,7 +155,7 @@ jobs:
             npm start &
 
   Functional_Testing:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: ["Deploy"]
     steps:
       - name: Checkout Repository

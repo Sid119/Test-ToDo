@@ -155,7 +155,7 @@ jobs:
             npm start &
 
   Functional_Testing:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: ["Deploy"]
     steps:
       - name: Checkout Repository

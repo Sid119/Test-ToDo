@@ -112,7 +112,7 @@ jobs:
   #       working-directory: backend
   #       run: npm test
 
-  deploy:
+  Deploy:
     runs-on: self-hosted
     steps:
       - name: Checkout Repository
@@ -153,3 +153,23 @@ jobs:
             cd frontend
             npm install
             npm start &
+
+  Functional_Testing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '11'  # Adjust as needed
+
+      - name: Build with Maven
+        run: mvn -f Fucntional-Testing/demo clean package
+
+      - name: Run Functional Tests
+        run: |
+          cd Fucntional-Testing/demo
+          mvn test

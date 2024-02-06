@@ -186,4 +186,6 @@ jobs:
         run: mvn clean install -B
 
       - name: Run Functional Tests
-        run: mvn test
+        run: |
+          cd Fucntional-Testing/demo
+          mvn test

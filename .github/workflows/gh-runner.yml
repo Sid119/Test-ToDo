@@ -31,7 +31,6 @@ jobs:
            npm start
 
       - name: Run Frontend
-        timeout-minutes: 10
         run: |
           cd frontend
           npm start

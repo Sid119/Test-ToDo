@@ -113,7 +113,7 @@ jobs:
   #       run: npm test
 
   Deploy:
-    runs-on: self-hosted
+    runs-on: windows_latest
     # needs: ["Unit_Testing"]
     steps:
       - name: Checkout Repository

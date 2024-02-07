@@ -49,11 +49,11 @@
       <version>2.47.1</version>
     </dependency>
 
-<!-- <dependency>
+<dependency>
     <groupId>org.seleniumhq.selenium</groupId>
     <artifactId>selenium-java</artifactId>
     <version>4.1.1</version> <!-- or the latest version available -->
-</dependency> -->
+</dependency>
 
 <dependency>
     <groupId>io.github.bonigarcia</groupId>

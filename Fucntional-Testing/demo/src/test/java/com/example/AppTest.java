@@ -29,7 +29,7 @@ public class AppTest {
         driver.get("http://localhost:3000/");
         System.out.println(driver.getTitle());
       
-            if (driver.getTitle().equals("ToDo App")){
+            if (driver.getTitle().equals("ToDoApp")){
                 
                 test.log(LogStatus.PASS, "Navigated to the specified URL");
             } else {

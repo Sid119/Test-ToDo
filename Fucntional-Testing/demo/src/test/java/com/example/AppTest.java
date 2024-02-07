@@ -1,4 +1,5 @@
 package com.example;
+
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -6,12 +7,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import io.github.bonigarcia.wdm.WebDriverManager; // Import WebDriverManager
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 public class AppTest {
-        WebDriver driver = new ChromeDriver();
+    WebDriver driver;
     static ExtentTest test;
     static ExtentReports report;
      
@@ -25,16 +27,18 @@ public class AppTest {
 
     @Test
     public void extentReportsDemo() throws InterruptedException {
-        
+        WebDriverManager.chromedriver().setup(); // Setup WebDriverManager
+
+        driver = new ChromeDriver(); // Initialize ChromeDriver
+
         driver.get("http://localhost:3000/");
         System.out.println(driver.getTitle());
-      
-            if (driver.getTitle().equals("ToDo App")){
-                
-                test.log(LogStatus.PASS, "Navigated to the specified URL");
-            } else {
-                test.log(LogStatus.FAIL, "Test Failed - Unexpected Page Title");
-            }
+
+      if (driver.getTitle().equals("ToDo App")) {
+            test.log(LogStatus.PASS, "Navigated to the specified URL");
+        } else {
+            test.log(LogStatus.FAIL, "Test Failed - Unexpected Page Title");
+        }
 
         Thread.sleep(2000);
         WebElement elements = driver.findElement(By.xpath("//input[@type='text']"));

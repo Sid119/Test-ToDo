@@ -1,4 +1,4 @@
-name: To-Do Pipeline.
+name: To-Do Pipeline
 on:
   push
 
@@ -179,6 +179,9 @@ jobs:
           curl -sS -o /tmp/chromedriver_linux64.zip https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip
           sudo unzip -o /tmp/chromedriver_linux64.zip -d /usr/local/bin/
           sudo chmod +x /usr/local/bin/chromedriver
+
+      - name: Wait for Chrome to initialize
+        run: sleep 10
 
       - name: Run Functional Tests
         run: |

@@ -13,7 +13,7 @@
     <sourceDirectory>src/main/java/com/example</sourceDirectory>
     <finalName>todo-app</finalName>
     <plugins>
-<!--      <plugin>
+     <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
@@ -21,7 +21,7 @@
                <reuseForks>true</reuseForks>
                <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
        </configuration>
-     </plugin> -->
+     </plugin>
 
     <plugin>
          <groupId>org.apache.maven.plugins</groupId>

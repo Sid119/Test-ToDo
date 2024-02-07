@@ -1,4 +1,4 @@
-name: To-Do Pipeline
+name: To-Do Pipeline.
 on:
   push
 

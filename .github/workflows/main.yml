@@ -168,11 +168,6 @@ jobs:
           java-version: '11'  # Adjust as needed
           distribution: 'adopt'
 
-      # - name: Build with maven
-      #   run: |
-      #     cd Fucntional-Testing/demo
-      #     mvn clean package
-
       - name: Run Functional Tests
         run: |
           cd Fucntional-Testing/demo

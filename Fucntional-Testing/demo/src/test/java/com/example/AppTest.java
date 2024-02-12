@@ -6,8 +6,8 @@ import org.testng.annotations.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import io.github.bonigarcia.wdm.WebDriverManager; // Import WebDriverManager
+import org.openqa.selenium.firefox.FirefoxDriver;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
@@ -25,9 +25,9 @@ public class AppTest {
 
     @Test
     public void extentReportsDemo() throws InterruptedException {
-        WebDriverManager.chromedriver().setup(); // Setup WebDriverManager
+        WebDriverManager.firefoxdriver().setup(); // Setup WebDriverManager for Firefox
 
-        driver = new ChromeDriver(); // Initialize ChromeDriver
+        driver = new FirefoxDriver(); // Initialize FirefoxDriver instead of ChromeDriver
 
         driver.get("http://localhost:3000/");
         System.out.println(driver.getTitle());
@@ -46,20 +46,11 @@ public class AppTest {
         
         adds.click();
         
-        
-         // Add new user
+        // Add new user
         Thread.sleep(2000);
         WebElement element = driver.findElement(By.xpath("//input[@type='text']"));
         element.sendKeys("john");
         WebElement add = driver.findElement(By.xpath("//button[text()='Add']"));
-        // if(driver.getTitle().equals("john"))
-        // {
-        // test.log(LogStatus.PASS, "Test Passed");
-        // }
-        // else
-        // {
-        // test.log(LogStatus.FAIL, "Test Failed");
-        // }
         add.click();
         Thread.sleep(2000);
         WebElement editIcon = driver.findElement(By.cssSelector("svg.icon1"));
@@ -78,12 +69,11 @@ public class AppTest {
         Thread.sleep(2000);
         WebElement removeIcon = driver.findElement(By.cssSelector("svg.icon2"));
         removeIcon.click();
-         driver.close();
+        driver.close();
     }
 
     @AfterClass
     public static void endTest() {
-        
         report.endTest(test);
         report.flush();
     }

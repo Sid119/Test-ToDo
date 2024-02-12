@@ -185,7 +185,12 @@ jobs:
       - name: Wait for Firefox to initialize
         run: sleep 10
 
+      - name: Print Directory Contents
+        run: ls -la Functional-Testing/demo
+
+
       - name: Run Functional Tests
         run: |
-          cd Functional-Testing/demo
+          # cd Functional-Testing/demo
+          cd demo
           mvn test

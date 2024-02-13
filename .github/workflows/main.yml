@@ -168,26 +168,25 @@ jobs:
           java-version: '11'  # Adjust as needed
           distribution: 'adopt'
 
-      - name: Install Firefox
+      - name: Install Google Chrome
         run: |
           sudo apt update
-          sudo apt install -y firefox
+          sudo apt install -y google-chrome-stable
 
-      - name: Download and Install GeckoDriver
+      - name: Download and Install ChromeDriver
         run: |
-          export GECKO_DRIVER_VERSION='v0.24.0'
-          wget https://github.com/mozilla/geckodriver/releases/download/$GECKO_DRIVER_VERSION/geckodriver-$GECKO_DRIVER_VERSION-linux64.tar.gz
-          tar -xvzf geckodriver-$GECKO_DRIVER_VERSION-linux64.tar.gz
-          rm geckodriver-$GECKO_DRIVER_VERSION-linux64.tar.gz
-          chmod +x geckodriver
-          sudo cp geckodriver /usr/local/bin/
+          CHROME_DRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+          curl -sS -o /tmp/chromedriver_linux64.zip https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip
+          sudo unzip -o /tmp/chromedriver_linux64.zip -d /usr/local/bin/
+          sudo chmod +x /usr/local/bin/chromedriver
 
-      - name: Wait for Firefox to initialize
+      - name: Wait for Chrome to initialize
         run: sleep 10
 
-      - name: Print Directory Contents
-        run: ls -la Functional-Testing/demo
-
+      - name: Run Functional Tests
+        run: |
+          cd Fucntional-Testing/demo
+          mvn test
 
       - name: Run Functional Tests
         run: |

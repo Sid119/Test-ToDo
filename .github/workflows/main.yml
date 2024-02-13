@@ -187,8 +187,3 @@ jobs:
         run: |
           cd Fucntional-Testing/demo
           mvn test
-
-      - name: Run Functional Tests
-        run: |
-          cd Functional-Testing/demo
-          mvn test

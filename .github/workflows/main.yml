@@ -165,7 +165,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
-          java-version: '8'  # Adjust as needed
+          java-version: '11'  # Adjust as needed
           distribution: 'adopt'
 
       - name: Install Google Chrome

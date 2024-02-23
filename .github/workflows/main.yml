@@ -155,9 +155,15 @@ jobs:
   #           npm install
   #           npm start &
 
-  Functional_Testing:
-    runs-on: ubuntu-latest  # Use GitHub-hosted Ubuntu runner
+# To Use GitHub-Hosted you must Set-excecution Policy
+# Get-ExecutionPolicy
+# Set-ExecutionPolicy RemoteSigned
+# Get-ExecutionPolicy
 
+
+  Functional_Testing:
+    runs-on: self-hosted
+    # needs: ["Deploy"]
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -167,21 +173,6 @@ jobs:
         with:
           java-version: '11'  # Adjust as needed
           distribution: 'adopt'
-
-      - name: Install Google Chrome
-        run: |
-          sudo apt update
-          sudo apt install -y google-chrome-stable
-
-      - name: Download and Install ChromeDriver
-        run: |
-          CHROME_DRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
-          curl -sS -o /tmp/chromedriver_linux64.zip https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip
-          sudo unzip -o /tmp/chromedriver_linux64.zip -d /usr/local/bin/
-          sudo chmod +x /usr/local/bin/chromedriver
-
-      - name: Wait for Chrome to initialize
-        run: sleep 10
 
       - name: Run Functional Tests
         run: |
